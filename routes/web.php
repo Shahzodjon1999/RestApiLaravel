@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth:api')->get('/user',function(Request $request){
+    return $request->user();
 });
+Route::get('/books',[BookController::class,'index']);
+Route::get('/books/{id}',[BookController::class,'show']);
+Route::post('/books',[BookController::class,'store']);
+Route::put('/books/{id}',[BookController::class,'update']);
+Route::delete('/books/{id}',[BookController::class,'destroy']);
