@@ -17,6 +17,6 @@ class BooksSeeder extends Seeder
             'name'=>$faker->sentence,
             'author'=>$faker->name,
             'pulish_date'=>$faker->date,
-        ]);
+        ]); 
     }
 }
