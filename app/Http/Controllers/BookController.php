@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use App\Models\Books;
 
 class BookController extends Controller
 {
@@ -46,7 +48,7 @@ class BookController extends Controller
             $books->name=is_null($request->name)?$books->name:$request->name;
             $books->auther=is_null($request->auther)?$books->auther:$request->auther;
             $books->publish_data=is_null($request->publish_data)?$books->publish_data:$request->publish_data;
-            $books->seve();
+            $books->save();
             return response()->json([
                 "massage"=>"Book update"
             ],404);
@@ -63,7 +65,7 @@ class BookController extends Controller
         if(Books::where('id',$id)->exists())
         {
             $books = Books::find($id);
-            $books.delete();
+            $books->delete();
             return response()->json([
                 "message"=>"records deleted."
             ],202);

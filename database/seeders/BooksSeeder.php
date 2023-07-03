@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Books;
 
 class BooksSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class BooksSeeder extends Seeder
         Books::create([
             'name'=>$faker->sentence,
             'author'=>$faker->name,
-            'pulish_date'=>$faker->date,
+            'publish_data'=>$faker->date,
         ]); 
     }
 }
