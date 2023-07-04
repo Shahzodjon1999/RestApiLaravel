@@ -11,7 +11,7 @@ class BookController extends Controller
     public function index()
     {
         $books=Books::all();
-        return response()->json($books);
+        return view('bookViews.index',compact('books'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function store(Request $request) 
@@ -30,7 +30,7 @@ class BookController extends Controller
         $books=Books::find($id);
         if(!empty($books))
         {
-            return response()->json($books);
+            return view('bookviews.show',compact('books'));
 
         }
         else
@@ -39,6 +39,11 @@ class BookController extends Controller
                 "message"=>"Book not found"
             ],404);
         }
+    }
+    public function edite($id)
+    {
+        $books=Books::find($id);
+        return view('bookviews.edit', compact('books'));
     }
     public function update(Request $request,$id)
     {
@@ -49,9 +54,7 @@ class BookController extends Controller
             $books->auther=is_null($request->auther)?$books->auther:$request->auther;
             $books->publish_data=is_null($request->publish_data)?$books->publish_data:$request->publish_data;
             $books->save();
-            return response()->json([
-                "massage"=>"Book update"
-            ],404);
+            return view('bookviews.edit',compact('books'));
         }    
         else
         {
